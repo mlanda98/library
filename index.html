@@ -5,47 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <link rel="stylesheet" href="styles.css">
-  
 </head>
 <body>
-  <script>
-    function Book(title, author, pages, read){
-      this.title = title;
-      this.author = author;
-      this.pages = pages;
-      this.read = read;
-    }
-    let myLibrary = [];
-    function addBookToLibrary(){
-      let title = prompt("Enter the book's title");
-      let author = prompt("Enter the author's name of the book");
-      let pages = prompt("Enter the number of pages in the book");
-      let read = prompt("Enter yes if you have read the book or no if you haven't");
-
-      myLibrary.push(new Book(title, author, pages, read));
-
-    }
-
-    function displayLibrary(){
-      console.log("myLibrary:");
-      myLibrary.forEach(function(book, index){
-        console.log(`Book ${index + 1}:`);
-        console.log("Title:", book.title);
-        console.log("Author:", book.author);
-        console.log("Pages:", book.pages);
-        console.log("Read:", book.read);
-      });
-    }
-
-   while (true){
-    addBookToLibrary();
-    let addAnother = prompt("Do you want to add another book (yes/no)");
-    if (addAnother != "yes"){
-      break;
-    }
-   }
-   
-    displayLibrary();
-  </script>
+  <div class="header">
+    <p class="title">Library</p>
+  </div>
+  <div id="library-container"></div>
+  <script src="script.js"></script>
 </body>
 </html>
