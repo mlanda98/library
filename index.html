@@ -15,23 +15,18 @@
       this.pages = pages;
       this.read = read;
     }
-
+    let myLibrary = [];
     function addBookToLibrary(){
-     let myLibrary = [];
-
-     while (true){
       let title = prompt("Enter the book's title");
       let author = prompt("Enter the author's name of the book");
       let pages = prompt("Enter the number of pages in the book");
       let read = prompt("Enter yes if you have read the book or no if you haven't");
 
       myLibrary.push(new Book(title, author, pages, read));
-     }
 
-     return myLibrary;
     }
 
-    function displayLibrary(myLibrary){
+    function displayLibrary(){
       console.log("myLibrary:");
       myLibrary.forEach(function(book, index){
         console.log(`Book ${index + 1}:`);
@@ -40,13 +35,17 @@
         console.log("Pages:", book.pages);
         console.log("Read:", book.read);
       });
-        
-
     }
 
-    
-    let bookLibrary = addBookToLibrary();
-    displayLibrary(bookLibrary);
+   while (true){
+    addBookToLibrary();
+    let addAnother = prompt("Do you want to add another book (yes/no)");
+    if (addAnother != "yes"){
+      break;
+    }
+   }
+   
+    displayLibrary();
   </script>
 </body>
 </html>
