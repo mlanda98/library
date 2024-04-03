@@ -1,22 +1,23 @@
-function Book(title, author, pages, read){
+class Book{
+  constructor(title, author, pages, read){
   this.title = title;
   this.author = author;
   this.pages = pages;
   this.read = read;
-}
-let myLibrary = [];
+  }
+  static myLibrary = [];
 
-function addBookToLibrary(title, author, pages, read){
-  myLibrary.push(new Book(title, author, pages, read));
-  displayLibrary();
+  static addBookToLibrary(title, author, pages, read){
+    this.myLibrary.push(new Book(title, author, pages, read));
+    this.displayLibrary();
 
-}
+  }
 
-function displayLibrary(){
-  let libraryContainer = document.getElementById("library-container");
-  libraryContainer.innerHTML = "";
+  static displayLibrary(){
+    let libraryContainer = document.getElementById("library-container");
+    libraryContainer.innerHTML = "";
 
-  myLibrary.forEach(function(book, index){
+  this.myLibrary.forEach(function(book, index){
     let bookDiv = document.createElement("div");
     bookDiv.classList.add("book");
 
@@ -25,22 +26,24 @@ function displayLibrary(){
     <p><strong>Author:</strong> ${book.author}</p>
     <p><strong>Pages:</strong> ${book.pages}</p>
     <p><strong>Read:</strong> ${book.read? "Yes" : "No"}</p>
-    <button onclick="toggleReadStatus(${index})">Change Read Status</button>
-    <button onclick="removeBook(${index})">Delete</button>
+    <button onclick="Book.toggleReadStatus(${index})">Change Read Status</button>
+    <button onclick="Book.removeBook(${index})">Delete</button>
     `;
 
     libraryContainer.appendChild(bookDiv);
   });
 }
 
-function toggleReadStatus(index){
-  myLibrary[index].read = !myLibrary[index].read;
-  displayLibrary();
+  static toggleReadStatus(index){
+    this.myLibrary[index].read = !this.myLibrary[index].read;
+    this.displayLibrary();
+  }
+  static removeBook(index){
+    this.myLibrary.splice(index, 1);
+    this.displayLibrary();
+  }
 }
-function removeBook(index){
-  myLibrary.splice(index, 1);
-  displayLibrary();
-}
+
 document.getElementById("add-book-button").addEventListener("click", function(){
   document.getElementById("form-container").style.display = "block";
 });
@@ -53,7 +56,7 @@ document.getElementById("book-form").addEventListener("submit", function(event){
   let pages = document.getElementById("pages").value;
   let read = document.getElementById("read").checked;
 
-  addBookToLibrary(title, author, pages, read);
+  Book.addBookToLibrary(title, author, pages, read);
 
   document.getElementById("book-form").reset();
   document.getElementById("form-container").style.display = "none";
